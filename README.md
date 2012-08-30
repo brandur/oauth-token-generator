@@ -1,7 +1,7 @@
 oauth-token-generator
 =====================
 
-Extremely simple binary for generating Oauth tokens and oauth secrets.
+Extremely simple program for generating Oauth tokens and oauth secrets.
 
 ``` bash
 export CONSUMER_KEY=...
