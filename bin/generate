@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'bundler'
+Bundler.require
+
+def env!(k)
+  ENV[k] || raise("missing: #{k}")
+end
+
+consumer_key    = env!("CONSUMER_KEY")
+consumer_secret = env!("CONSUMER_SECRET")
+provider_uri    = env!("PROVIDER_URI")
+
+consumer = OAuth::Consumer.new(consumer_key, consumer_secret, site: provider_uri)
+
+request_token = consumer.get_request_token
+puts "go to: #{request_token.authorize_url}"
+puts "get your OAuth PIN and enter it here:"
+pin = gets.chomp
+
+access_token = request_token.get_access_token :pin => pin
+puts "your OAuth token is: #{access_token.token}"
+puts "your OAuth secret is: #{access_token.secret}"
